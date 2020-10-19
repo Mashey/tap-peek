@@ -9,18 +9,6 @@ import singer
 from datetime import datetime, timezone
 
 
-# with open('./tap_peek/activity_info_schema.json') as json_file:
-#     activity_info_schema = json.load(json_file)
-
-
-# with open('./tap_peek/core_addons_schema.json') as json_file:
-#     core_addons_schema = json.load(json_file)
-
-
-# with open('./tap_peek/timeslots_schema.json') as json_file:
-#     timeslots_schema = json.load(json_file)
-
-
 pp = pprint.PrettyPrinter(indent=4, depth=3)
 
 # args = singer.utils.parse_args(["token", "partner_id"])
