@@ -11,7 +11,7 @@
     "minute_length": { "type": "integer" },
     "resources_names": {
       "type": "array",
-      "items": [{ "type": ["null", "string"] }]
+      "items": { "type": ["null", "string"] }
     },
     "availability_status": { "type": ["null", "string"] },
     "availability_max_party_size": { "type": "integer" },

@@ -14,19 +14,17 @@
     "partner_id": { "type": ["null", "string"] },
     "tickets": {
       "type": "array",
-      "items": [
-        {
-          "type": ["object", "null"],
-          "properties": {
-            "id": { "type": ["null", "string"] },
-            "name": { "type": ["null", "string"] },
-            "description": { "type": ["null", "string"] },
-            "price": { "type": "integer" },
-            "price_after_tax": { "type": "integer" },
-            "status": { "type": ["null", "string"] }
-          }
+      "items": {
+        "type": ["object", "null"],
+        "properties": {
+          "id": { "type": ["null", "string"] },
+          "name": { "type": ["null", "string"] },
+          "description": { "type": ["null", "string"] },
+          "price": { "type": "integer" },
+          "price_after_tax": { "type": "integer" },
+          "status": { "type": ["null", "string"] }
         }
-      ]
+      }
     }
   }
 }
