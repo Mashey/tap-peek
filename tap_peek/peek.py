@@ -29,6 +29,7 @@ pp = pprint.PrettyPrinter(indent=4, depth=3)
 # The code below is for testing with Pytest.
 load_dotenv()
 API_KEY = json.loads(os.getenv("dandelion_chocolate"))['token']
+partner_id = json.loads(os.getenv("dandelion_chocolate"))['partner_id']
 
 headers = {
     'Authorization': API_KEY
@@ -83,7 +84,7 @@ def fetch_core_addons():
     }
 
     response = client.get(
-        "https://pro-app.peek.com/services/once-pro/api/activities/partner/5bd78596c5cbe40069000007", headers=headers)
+        f"https://pro-app.peek.com/services/once-pro/api/activities/partner/{partner_id}", headers=headers)
     
     core_addons = response.json()
 
