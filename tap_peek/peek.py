@@ -9,18 +9,6 @@ import singer
 from datetime import datetime, timezone
 
 
-with open('./tap_peek/activity_info_schema.json') as json_file:
-    activity_info_schema = json.load(json_file)
-
-
-with open('./tap_peek/core_addons_schema.json') as json_file:
-    core_addons_schema = json.load(json_file)
-
-
-with open('./tap_peek/timeslots_schema.json') as json_file:
-    timeslots_schema = json.load(json_file)
-
-
 pp = pprint.PrettyPrinter(indent=4, depth=3)
 
 # args = singer.utils.parse_args(["token", "partner_id"])
@@ -59,8 +47,12 @@ def fetch_core_activities():
         "legacy_id": "5bd78596c5cbe40069000007"
     }
 
+    with open('./tap_peek/activity_info_schema.json') as json_file:
+        activity_info_schema = json.load(json_file)
+
     response = client.get(
         "https://pro-app.peek.com/services/pro/core/accounts?include=activities%2Cactivities.resource_options", headers=headers, params=payload)
+
     core_activities = parse_activities(response.json())
 
     singer.write_schema('activity_info', activity_info_schema, 'id')
@@ -84,9 +76,12 @@ def fetch_core_addons():
     payload = {
     }
 
+    with open('./tap_peek/core_addons_schema.json') as json_file:
+        core_addons_schema = json.load(json_file)
+
     response = client.get(
         f"https://pro-app.peek.com/services/once-pro/api/activities/partner/{partner_id}", headers=headers)
-    
+
     core_addons = response.json()
 
     singer.write_schema('core_addons', core_addons_schema, 'id')
@@ -101,9 +96,12 @@ def fetch_timeslots():
         "end_date": "2020-10-15"
     }
 
+    with open('./tap_peek/timeslots_schema.json') as json_file:
+        timeslots_schema = json.load(json_file)
+
     response = client.get(
         "https://pro-app.peek.com/services/once-pro/api/timeslots", headers=headers, params=payload)
-    
+
     timeslots = response.json()
 
     singer.write_schema('timeslots', timeslots_schema, 'fid')
