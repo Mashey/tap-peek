@@ -13,10 +13,17 @@ with open('./tap_peek/activity_info_schema.json') as json_file:
     activity_info_schema = json.load(json_file)
 
 
+with open('./tap_peek/core_addons_schema.json') as json_file:
+    core_addons_schema = json.load(json_file)
+
+
+with open('./tap_peek/timeslots_schema.json') as json_file:
+    timeslots_schema = json.load(json_file)
+
+
 pp = pprint.PrettyPrinter(indent=4, depth=3)
 
-# args = singer.utils.parse_args(["token", "company_id"])
-# company_id = args.config['company_id']
+# args = singer.utils.parse_args(["token"])
 # API_KEY = args.config['token']
 
 # The code below is for testing with Pytest.
@@ -36,8 +43,8 @@ def fetch_transactions():
 
     response = client.get(
         "https://pro-app.peek.com/services/reporting/api/reporting/transaction_records", headers=headers)
-    transactions = parse_activities(response.json())
 
+    transactions = response.json()
     # singer.write_schema('transactions', transactions_schema, 'id')
     # singer.write_records('transactions', transactions)
 
@@ -77,31 +84,35 @@ def fetch_core_addons():
 
     response = client.get(
         "https://pro-app.peek.com/services/once-pro/api/activities/partner/5bd78596c5cbe40069000007", headers=headers)
-    core_addons = parse_activities(response.json())
+    
+    core_addons = response.json()
 
-    # singer.write_schema('core_addons', core_addons_schema, 'id')
-    # singer.write_records('core_addons', core_addons)
+    singer.write_schema('core_addons', core_addons_schema, 'id')
+    singer.write_records('core_addons', core_addons)
 
     return core_addons
 
 
 def fetch_timeslots():
     payload = {
+        "start_date": "2020-08-25",
+        "end_date": "2020-10-15"
     }
 
     response = client.get(
-        "https://pro-app.peek.com/services/once-pro/api/timeslots", headers=headers)
-    timeslots = parse_activities(response.json())
+        "https://pro-app.peek.com/services/once-pro/api/timeslots", headers=headers, params=payload)
+    
+    timeslots = response.json()
 
-    # singer.write_schema('timeslots', timeslots_schema, 'id')
-    # singer.write_records('timeslots', timeslots)
+    singer.write_schema('timeslots', timeslots_schema, 'fid')
+    singer.write_records('timeslots', timeslots)
 
     return timeslots
 
 
-transactions = fetch_transactions()
 activities = fetch_core_activities()
 addons = fetch_core_addons()
 timeslots = fetch_timeslots()
+# transactions = fetch_transactions()
 
 test = 'variable'
