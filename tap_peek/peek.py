@@ -23,8 +23,9 @@ with open('./tap_peek/timeslots_schema.json') as json_file:
 
 pp = pprint.PrettyPrinter(indent=4, depth=3)
 
-# args = singer.utils.parse_args(["token"])
+# args = singer.utils.parse_args(["token", "partner_id"])
 # API_KEY = args.config['token']
+# partner_id = args.config['partner_id']
 
 # The code below is for testing with Pytest.
 load_dotenv()
