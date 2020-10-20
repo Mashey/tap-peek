@@ -37,7 +37,7 @@ def fetch_transactions(new_start_date="2020-08-01", new_end_date="2020-08-25"):
         "page": "use meta.next_page"
     }
 
-    with open('./tap_peek/transactions_schema.json') as json_file:
+    with open('./tap_peek/schemas/transactions_schema.json') as json_file:
         transactions_schema = json.load(json_file)
 
     response = client.get(
@@ -57,7 +57,7 @@ def fetch_core_activities():
         "legacy_id": "5bd78596c5cbe40069000007"
     }
 
-    with open('./tap_peek/activity_info_schema.json') as json_file:
+    with open('./tap_peek/schemas/activity_info_schema.json') as json_file:
         activity_info_schema = json.load(json_file)
 
     response = client.get(
@@ -83,7 +83,7 @@ def parse_activities(response):
 
 
 def fetch_core_addons():
-    with open('./tap_peek/core_addons_schema.json') as json_file:
+    with open('./tap_peek/schemas/core_addons_schema.json') as json_file:
         core_addons_schema = json.load(json_file)
 
     response = client.get(
@@ -103,7 +103,7 @@ def fetch_timeslots(start_date="2020-08-25", end_date="2020-10-15"):
         "end_date": end_date
     }
 
-    with open('./tap_peek/timeslots_schema.json') as json_file:
+    with open('./tap_peek/schemas/timeslots_schema.json') as json_file:
         timeslots_schema = json.load(json_file)
 
     response = client.get(
