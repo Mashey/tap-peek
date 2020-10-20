@@ -53,15 +53,15 @@ def fetch_transactions(new_start_date="2020-08-01", new_end_date="2020-08-25"):
 
 def fetch_core_activities():
     payload = {
-        # "include": "activities%2Cactivities.resource_options",
-        "legacy_id": "5bd78596c5cbe40069000007"
+        "include": "activities,activities.resource_options",
+        "legacy_id": partner_id
     }
 
     with open('./tap_peek/schemas/activity_info_schema.json') as json_file:
         activity_info_schema = json.load(json_file)
 
     response = client.get(
-        "https://pro-app.peek.com/services/pro/core/accounts?include=activities%2Cactivities.resource_options", headers=headers, params=payload)
+        "https://pro-app.peek.com/services/pro/core/accounts", headers=headers, params=payload)
 
     core_activities = parse_activities(response.json())
 
