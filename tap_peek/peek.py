@@ -27,16 +27,26 @@ headers = {
 client = requests.Session()
 
 
-def fetch_transactions():
+def fetch_transactions(new_start_date="2020-08-01", new_end_date="2020-08-25"):
+    start_date = new_start_date
+    end_date = new_end_date
+
     payload = {
+        "fiql_query": f"partner_id=={partner_id};record_type=in=(purchase,reservation);purchase_type=in=(activity,addon,security_deposit,additional_charge);purchase_date=ge={start_date};purchase_date=le={end_date};currency==usd",
+        "page_size": "50",
+        "page": "use meta.next_page"
     }
 
+    with open('./tap_peek/transactions_schema.json') as json_file:
+        transactions_schema = json.load(json_file)
+
     response = client.get(
-        "https://pro-app.peek.com/services/reporting/api/reporting/transaction_records", headers=headers)
+        "https://pro-app.peek.com/services/reporting/api/reporting/transaction_records", headers=headers, params=payload)
 
     transactions = response.json()
-    # singer.write_schema('transactions', transactions_schema, 'id')
-    # singer.write_records('transactions', transactions)
+
+    singer.write_schema('transactions', transactions_schema, 'id')
+    singer.write_records('transactions', transactions)
 
     return transactions
 
@@ -73,9 +83,6 @@ def parse_activities(response):
 
 
 def fetch_core_addons():
-    payload = {
-    }
-
     with open('./tap_peek/core_addons_schema.json') as json_file:
         core_addons_schema = json.load(json_file)
 
@@ -90,10 +97,10 @@ def fetch_core_addons():
     return core_addons
 
 
-def fetch_timeslots():
+def fetch_timeslots(start_date="2020-08-25", end_date="2020-10-15"):
     payload = {
-        "start_date": "2020-08-25",
-        "end_date": "2020-10-15"
+        "start_date": start_date,
+        "end_date": end_date
     }
 
     with open('./tap_peek/timeslots_schema.json') as json_file:
@@ -113,6 +120,6 @@ def fetch_timeslots():
 activities = fetch_core_activities()
 addons = fetch_core_addons()
 timeslots = fetch_timeslots()
-# transactions = fetch_transactions()
+transactions = fetch_transactions()
 
 test = 'variable'
