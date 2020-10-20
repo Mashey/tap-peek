@@ -13,25 +13,6 @@ If you are already familiar with `Python Poetry` and `singer-python` the next fe
 - After pulling the repo run `poetry install`
   - This ensures all dependencies and virtualenvs are the correct version
 
-### Environment Variables
-
-- The `singer-python` package is included to handle secret environment variables
-- There is a `config_tap_<company>.json` file for each company
-  - This file contains `partner_id` and `API_KEY`
-- The configuration file used is determined by the command line arguments when launching the tap
-  - `python tap_peek.py -c config_tap_<company>.json | target-<name> -c config_target_<name>.json`
-- The `partner_id` and `API_KEY` are set by the following code:
-
-```python
-# peek.py
-
-...
-
-args = singer.utils.parse_args(["token", "partner_id"])
-partner_id = args.config['partner_id']
-API_KEY = args.config['token']
-```
-
 ### Add native Poetry virtualenv support to VS Code (optional)
 
 - VS Code can be configured to support Poetry virtual environments natively
@@ -66,9 +47,59 @@ API_KEY = args.config['token']
 New to Poetry? The docs are excellent, and there is more information about
 managing environments [here](https://python-poetry.org/docs/managing-environments/).
 
+### Command Line Args in VS Code
+
+Running the tap in production requires command line args to be passed in similar to this:
+
+```python
+python tap_peek.py -c config_tap_<company>.json | target-<name> -c config_target_<name>.json
+```
+
+To enable this functionality in `VS Code` add a `launch.json` file to the `.vscode` directory. Paste the following code into the file, and adjust `config_tap_<company>.json` to the desired company:
+
+```python
+# launch.json
+
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python: Current File",
+      "type": "python",
+      "request": "launch",
+      "program": "${file}",
+      "console": "integratedTerminal",
+      "args": [
+        "-c",
+        "config_tap_<company>.json"
+      ]
+    }
+  ]
+}
+```
+
 ## Tap Documentation
 
 This service is designed to be company agnostic, but it does require the correct company `token` and `partner_id` to be loaded from the `company_name` environment variable.
+
+### Environment Variables
+
+- The `singer-python` package is included to handle secret environment variables
+- There is a `config_tap_<company>.json` file for each company
+  - This file contains `partner_id` and `API_KEY`
+- The configuration file used is determined by the command line arguments when launching the tap
+  - `python tap_peek.py -c config_tap_<company>.json | target-<name> -c config_target_<name>.json`
+- The `partner_id` and `API_KEY` are set by the following code:
+
+```python
+# peek.py
+
+...
+
+args = singer.utils.parse_args(["token", "partner_id"])
+partner_id = args.config['partner_id']
+API_KEY = args.config['token']
+```
 
 ### Testing :: `partner_id` and `API_KEY`
 
