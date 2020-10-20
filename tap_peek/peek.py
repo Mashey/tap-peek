@@ -11,14 +11,15 @@ from datetime import datetime, timezone
 
 pp = pprint.PrettyPrinter(indent=4, depth=3)
 
-# args = singer.utils.parse_args(["token", "partner_id"])
-# API_KEY = args.config['token']
-# partner_id = args.config['partner_id']
+# This code is for production.
+args = singer.utils.parse_args(["token", "partner_id"])
+API_KEY = args.config['token']
+partner_id = args.config['partner_id']
 
 # The code below is for testing with Pytest.
-load_dotenv()
-API_KEY = json.loads(os.getenv("dandelion_chocolate"))['token']
-partner_id = json.loads(os.getenv("dandelion_chocolate"))['partner_id']
+# load_dotenv()
+# API_KEY = json.loads(os.getenv("dandelion_chocolate"))['token']
+# partner_id = json.loads(os.getenv("dandelion_chocolate"))['partner_id']
 
 headers = {
     'Authorization': API_KEY
@@ -121,5 +122,3 @@ activities = fetch_core_activities()
 addons = fetch_core_addons()
 timeslots = fetch_timeslots()
 transactions = fetch_transactions()
-
-test = 'variable'
