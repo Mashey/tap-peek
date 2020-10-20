@@ -57,7 +57,7 @@ python tap_peek.py -c config_tap_<company>.json | target-<name> -c config_target
 
 To enable this functionality in `VS Code` add a `launch.json` file to the `.vscode` directory. Paste the following code into the file, and adjust `config_tap_<company>.json` to the desired company:
 
-```python
+```json
 # launch.json
 
 {
@@ -135,11 +135,11 @@ partner_id = args.config['partner_id']
 
 The available Peek API endpoints.
 
-#### `fetch_transactions(new_start_date, new_end_date)`
+#### Transactions :: `fetch_transactions(new_start_date, new_end_date)`
 
 Endpoint URL:
 
-```python
+```markdown
 https://pro-app.peek.com/services/reporting/api/reporting/transaction_records
 ```
 
@@ -158,11 +158,11 @@ Calling `fetch_transactions()`
 fetch_transactions("2020-08-15", "2020-08-25")
 ```
 
-#### `fetch_core_activities()`
+#### Core Activities :: `fetch_core_activities()`
 
 Endpoint URL:
 
-```python
+```markdown
 https://pro-app.peek.com/services/pro/core/accounts
 ```
 
@@ -179,11 +179,11 @@ Calling `fetch_core_activities()`
 fetch_core_activities()
 ```
 
-#### `fetch_core_addons()`
+#### Core Addons :: `fetch_core_addons()`
 
 Endpoint URL:
 
-```python
+```markdown
 https://pro-app.peek.com/services/once-pro/api/activities/partner/{partner_id}
 ```
 
@@ -200,11 +200,11 @@ Calling `fetch_core_addons()`
 fetch_core_addons()
 ```
 
-#### `fetch_timeslots(start_date="year-month-day", end_date="year-month-day")`
+#### Timeslots :: `fetch_timeslots(start_date, end_date)`
 
 Endpoint URL:
 
-```python
+```markdown
 https://pro-app.peek.com/services/once-pro/api/timeslots
 ```
 
@@ -219,7 +219,7 @@ def fetch_timeslots(start_date="year-month-day", end_date="year-month-day"):
   ...
 ```
 
-Calling `fetch_timeslots(start_date="year-month-day", end_date="year-month-day")`
+Calling `fetch_timeslots(start_date, end_date)`
 
 ```python
 fetch_timeslots("2020-08-15", "2020-08-25")
