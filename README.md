@@ -89,11 +89,15 @@ partner_id = json.loads(os.getenv("company_name"))['partner_id']
 Then ensure the regular args code block is commented out:
 
 ```python
+# peek.py
+...
+
 # This code is for production.
 args = singer.utils.parse_args(["token", "partner_id"])
 API_KEY = args.config['token']
 partner_id = args.config['partner_id']
 
+...
 ```
 
 ### Endpoints
