@@ -70,16 +70,30 @@ managing environments [here](https://python-poetry.org/docs/managing-environment
 
 This service is designed to be company agnostic, but it does require the correct company `token` and `partner_id` to be loaded from the `company_name` environment variable.
 
-### Access and set a company's `token` to use with Pytest
+### Testing :: `partner_id` and `API_KEY`
+
+Passing the normal command line args to the tap in the test environment is not predictable. Uncomment the following code block to use with testing:
 
 ```python
-API_KEY = json.loads(os.getenv("company_name"))["token"]
+# peek.py
+...
+
+# The code below is for testing with Pytest.
+load_dotenv()
+API_KEY = json.loads(os.getenv("company_name"))['token']
+partner_id = json.loads(os.getenv("company_name"))['partner_id']
+
+...
 ```
 
-### Access and set a company's `partner_id` to use with Pytest
+Then ensure the regular args code block is commented out:
 
 ```python
-partner_id = json.loads(os.getenv("company_name"))["partner_id"]
+# This code is for production.
+args = singer.utils.parse_args(["token", "partner_id"])
+API_KEY = args.config['token']
+partner_id = args.config['partner_id']
+
 ```
 
 ### Endpoints
