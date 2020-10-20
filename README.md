@@ -106,6 +106,12 @@ The available Peek API endpoints.
 
 #### `fetch_transactions(new_start_date, new_end_date)`
 
+Endpoint URL:
+
+```python
+https://pro-app.peek.com/services/reporting/api/reporting/transaction_records
+```
+
 This function returns transactions within the given date range. The associated schema is `transactions_schema.json`.
 
 ```python
@@ -123,6 +129,12 @@ fetch_transactions("2020-08-15", "2020-08-25")
 
 #### `fetch_core_activities()`
 
+Endpoint URL:
+
+```python
+https://pro-app.peek.com/services/pro/core/accounts
+```
+
 This function returns core activities for a given partner. The associated schema is `activity_info_schema.json`.
 
 ```python
@@ -138,6 +150,12 @@ fetch_core_activities()
 
 #### `fetch_core_addons()`
 
+Endpoint URL:
+
+```python
+https://pro-app.peek.com/services/once-pro/api/activities/partner/{partner_id}
+```
+
 This function returns core addons for a given partner. The associated schema is `core_addons_schema.json`.
 
 ```python
@@ -151,7 +169,13 @@ Calling `fetch_core_addons()`
 fetch_core_addons()
 ```
 
-#### fetch_timeslots(start_date="year-month-day", end_date="year-month-day")
+#### `fetch_timeslots(start_date="year-month-day", end_date="year-month-day")`
+
+Endpoint URL:
+
+```python
+https://pro-app.peek.com/services/once-pro/api/timeslots
+```
 
 This function returns all timeslots for a given date range. The associated schema is `timeslots_schema.json`.
 
@@ -199,3 +223,16 @@ Documentation for packages used in this project.
 ### `Python Dotenv` Package :: Environment Variables
 
 - [Python Dotenv Docs](https://pypi.org/project/python-dotenv/)
+
+### `JSON Schema`
+
+- [Understanding JSON Schema](https://json-schema.org/understanding-json-schema/index.html)
+
+### `Singer Taps and Targets`
+
+- [Singer Getting Started](https://github.com/singer-io/getting-started)
+- [Developing a Tap](https://github.com/singer-io/getting-started/blob/master/docs/RUNNING_AND_DEVELOPING.md#developing-a-tap)
+
+### `Peek Application`
+
+- [Peek Pro](https://www.peek.com/pro/)
