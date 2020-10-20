@@ -9,6 +9,7 @@ Add an overview of the changes in this pull request.
 - [ ] Refactor
 - [ ] Breaking Change
 - [ ] Testing
+- [ ] Documentation
 
 ## Environment and Dependencies
 
