@@ -232,3 +232,7 @@ Documentation for packages used in this project.
 
 - [Singer Getting Started](https://github.com/singer-io/getting-started)
 - [Developing a Tap](https://github.com/singer-io/getting-started/blob/master/docs/RUNNING_AND_DEVELOPING.md#developing-a-tap)
+
+### `Peek Application`
+
+- [Peek Pro](https://www.peek.com/pro/)
