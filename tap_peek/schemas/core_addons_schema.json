@@ -9,11 +9,11 @@
     "schedulable": { "type": "boolean" },
     "currency": { "type": ["null", "string"] },
     "consumer_activity_status": { "type": ["null", "string"] },
-    "minimum_booking_count": { "type": "integer" },
+    "minimum_booking_count": { "type": ["null", "integer"] },
     "minimum_booking_prevents_purchase": { "type": "boolean" },
     "partner_id": { "type": ["null", "string"] },
     "tickets": {
-      "type": "array",
+      "type": ["null", "array"],
       "items": {
         "type": ["object", "null"],
         "properties": {
