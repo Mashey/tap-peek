@@ -1,1 +1,1 @@
-include tap_zenefits/schemas/*.json
+include tap_peek/schemas/*.json
