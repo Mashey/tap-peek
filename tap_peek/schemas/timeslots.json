@@ -8,21 +8,21 @@
     "start": { "type": ["null", "string"] },
     "end": { "type": ["null", "string"] },
     "date": { "type": ["null", "string"] },
-    "minute_length": { "type": "integer" },
+    "minute_length": { "type": ["null", "integer"] },
     "resources_names": {
-      "type": "array",
+      "type": ["null", "array"],
       "items": { "type": ["null", "string"] }
     },
     "availability_status": { "type": ["null", "string"] },
-    "availability_max_party_size": { "type": "integer" },
-    "availability_total_capacity": { "type": "integer" },
-    "availability_available_spots": { "type": "integer" },
-    "availability_spots_taken": { "type": "integer" },
+    "availability_max_party_size": { "type": ["null", "integer"] },
+    "availability_total_capacity": { "type": ["null", "integer"] },
+    "availability_available_spots": { "type": ["null", "integer"] },
+    "availability_spots_taken": { "type": ["null", "integer"] },
     "private_availability_code": { "type": ["null", "string"] },
     "time_series_type": { "type": ["null", "string"] },
     "is_freesale": { "type": "boolean" },
     "is_fake": { "type": "boolean" },
-    "checked_in_count": { "type": "integer" },
+    "checked_in_count": { "type": ["null", "integer"] },
     "manifest_notes": { "type": ["null", "string"] }
   }
 }
