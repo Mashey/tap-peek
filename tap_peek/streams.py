@@ -78,7 +78,7 @@ class Transactions(CatalogStream):
 
 class Timeslots(CatalogStream):
     tap_stream_id  = 'timeslots'
-    key_properties = ['id']
+    key_properties = ['fid']
     object_type    = 'TIMESLOT'
 
     def sync(self, partner_id=None, start_date=None, end_date=None, *args, **kwargs):
